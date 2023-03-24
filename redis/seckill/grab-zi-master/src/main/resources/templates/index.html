@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>抢粽子</title>
+    <style>
+        body {
+            background: #C9FFBF;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFAFBD, #C9FFBF);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFAFBD, #C9FFBF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        .position-b {
+            text-align: center;
+        }
+        .zz-size {
+            width: 100px;
+            height: 100px;
+            background: #C9FFBF;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #FFAFBD, #C9FFBF);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #FFAFBD, #C9FFBF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+        .button-model{
+            width:200px;/*设置按钮宽度*/
+            height: 30px;/*设置按钮高度*/
+            color:white;/*字体颜色*/
+            background-color: #ce1723;/*按钮背景颜色*/
+            border-radius: 3px;/*让按钮变得圆滑一点*/
+            border:  0;/*消去按钮丑的边框*/
+            margin: 0;
+            outline: none;/*取消轮廓*/
+            font-family: KaiTi;/*字体设置为楷体*/
+            font-size: 17px;/*设置字体大小*/
+            text-align: center;/*字体居中*/
+            cursor: pointer;/*设置鼠标箭头手势*/
+        }
+    </style>
+</head>
+<body>
+<div class="position-b">
+<img class="zz-size" th:src="@{/image/zi.jpg}" alt="">
+<h1>免费抢粽子吃！！！！</h1>
+
+<form id="msform" action="" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" id="prodid" name="gid" value="0101">
+    <input type="button" class="button-model"  id="miaosha_btn" name="seckill_btn" value="点击秒杀"/>
+</form>
+</div>
+</body>
+<script  type="text/javascript" th:src="@{/jquery/jquery-3.1.0.js}"></script>
+<script  type="text/javascript">
+    $(function(){
+        $("#miaosha_btn").click(function(){
+            var url=$("#msform").attr("action");
+            $.post('/grab/doGrabZz',$("#msform").serialize(),function(data){
+                if(data== false){
+                    alert("抢光了,秒杀结束！" );
+                    $("#miaosha_btn").attr("disabled",true);
+                }
+            } );
+        })
+    })
+</script>
+</html>
